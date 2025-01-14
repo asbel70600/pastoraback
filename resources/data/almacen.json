@@ -1,0 +1,80 @@
+[
+  {
+    "id": 1,
+    "nombreCentro":"La Pastora",
+    "productos":[
+      {
+        "id":1,
+        "nombre":"Paquete de Pollo",
+        "cantidad":100
+      } ,
+      {
+        "id":2,
+        "nombre":"Paquete de Salchicha",
+        "cantidad":100
+      } ,
+      {
+        "id":3,
+        "nombre":"Aceite",
+        "cantidad":100
+      },       
+      {
+        "id":4,
+        "nombre":"Saco de arroz",
+        "cantidad":100
+      } 
+    ]
+  },
+  {
+    "id": 2,
+    "nombreCentro":"El Pastor",
+    "productos":[
+      {
+        "id":1,
+        "nombre":"Paquete de Pollo",
+        "cantidad":100
+      } ,
+      {
+        "id":2,
+        "nombre":"Paquete de Salchicha",
+        "cantidad":100
+      } ,
+      {
+        "id":3,
+        "nombre":"Aceite",
+        "cantidad":100
+      },       
+      {
+        "id":4,
+        "nombre":"Saco de arroz",
+        "cantidad":100
+      } 
+    ]
+  },
+  {
+    "id": 3,
+    "nombreCentro":"Corderitos",
+    "productos":[
+      {
+        "id":1,
+        "nombre":"Paquete de Pollo",
+        "cantidad":100
+      } ,
+      {
+        "id":2,
+        "nombre":"Paquete de Salchicha",
+        "cantidad":100
+      } ,
+      {
+        "id":3,
+        "nombre":"Aceite",
+        "cantidad":100
+      },       
+      {
+        "id":4,
+        "nombre":"Saco de arroz",
+        "cantidad":100
+      } 
+    ]
+  }
+]

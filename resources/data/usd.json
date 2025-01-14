@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "montousd":100,
+    "precio": 300,
+    "montocup" : 30000
+  },
+  {
+    "id": 2,
+    "montousd":150,
+    "precio": 315,
+    "montocup" : 47250
+  },
+  {
+    "id": 3,
+    "montousd":200,
+    "precio": 300,
+    "montocup" : 60000
+  },
+  {
+    "id": 4,
+    "montousd":100,
+    "precio": 300,
+    "montocup" : 30000
+  },
+  {
+    "id": 5,
+    "montousd":150,
+    "precio": 315,
+    "montocup" : 47250
+  },
+  {
+    "id": 6,
+    "montousd":200,
+    "precio": 300,
+    "montocup" : 60000
+  },
+  {
+    "id": 7,
+    "montousd":100,
+    "precio": 300,
+    "montocup" : 30000
+  },
+  {
+    "id": 8,
+    "montousd":200,
+    "precio": 300,
+    "montocup" : 60000
+  },
+  {
+    "id": 9,
+    "montousd":100,
+    "precio": 300,
+    "montocup" : 30000
+  }
+
+]

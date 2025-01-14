@@ -1,0 +1,37 @@
+[
+  {
+    "id":1,
+    "nombre":"Luis Daniel",
+    "interes": 8,
+    "prestado":20000,
+    "devuelto": 5000
+  },
+  {
+    "id":2,
+    "nombre":"Patricia",
+    "interes":8,
+    "prestado":10000,
+    "devuelto": 5000
+  },
+  {
+    "id":3,
+    "nombre":"Tomas",
+    "interes":8,
+    "prestado":15000,
+    "devuelto": 4000
+  },
+  {
+    "id":4,
+    "nombre":"Frank",
+    "interes":8,
+    "prestado":12000,
+    "devuelto": 6000
+  },
+    {
+    "id":5,
+    "nombre":"Frank",
+    "interes":8,
+    "prestado":12000,
+    "devuelto": 6000
+  }
+]

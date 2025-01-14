@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "image": "pollo.jpeg",
+    "nombre": "Paquete de pollo",
+    "peso": "10kg",
+    "precio": "10000"
+  },
+  {
+    "id": "2",
+    "image": "aceite.jpeg",
+    "nombre": "Aceite",
+    "peso": "1kg",
+    "precio": "1000"
+  },
+  {
+    "id": "3",
+    "image":"saco_de_arroz.jpeg",
+    "nombre": "Saco de arroz",
+    "peso": "20kg",
+    "precio": "15000"
+  },
+  {
+    "id": "4",
+    "image": "paquete_de_salchichas.jpg",
+    "nombre": "Paquete de Salchicha",
+    "peso": "1kg",
+    "precio": "800"
+  }
+]

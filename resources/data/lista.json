@@ -1,0 +1,59 @@
+[
+  {
+    "id":"1",
+    "hora": "3:00",
+    "monto": "10000",
+    "fecha": "6/7/2024",
+    "productos": [
+      {
+        "nombre":"Aceite",
+        "cantidad": 2,
+        "precio":1000
+      },
+      {
+        "nombre":"Saco de Arroz",
+        "cantidad": 2,
+        "precio":1000
+      }
+    ]
+  },
+  {
+    "id":"2",
+    "hora": "3:00",
+    "monto": "10000",
+    "fecha": "6/7/2024",
+    "productos": [
+      {
+        "nombre":"Aceite",
+        "cantidad": 2,
+        "precio":1000
+      }
+    ]
+  },
+  {
+    "id":"3",
+    "hora": "3:00",
+    "monto": "10000",
+    "fecha": "6/7/2024",
+    "productos": [
+      {
+        "nombre":"Aceite",
+        "cantidad": 2,
+        "precio":1000
+      }
+    ]
+  },
+  {
+    "id":"4",
+    "hora": "3:00",
+    "monto": "10000",
+    "fecha": "6/7/2024",
+    "productos": [
+      {
+        "nombre":"Aceite",
+        "cantidad": 2,
+        "precio":1000
+      }
+    ]
+  }
+]

@@ -1,0 +1,27 @@
+[
+    {
+      "id": 1,
+      "nombre": "Zapatillas deportivas",
+      "descripcion": "Zapatillas cómodas para correr o hacer ejercicio.",
+      "precio": 5999
+    },
+    {
+      "id": 2,
+      "nombre": "Camiseta de algodón",
+      "descripcion": "Camiseta básica de manga corta, ideal para el uso diario.",
+      "precio": 1999
+    },
+    {
+      "id": 3,
+      "nombre": "Contenedor Mexico",
+      "descripcion": "Contenedor de aceite que compre con Grisel",
+      "precio": 25000
+    },
+    {
+      "id": 4,
+      "nombre": "Contenedor USA ",
+      "descripcion": "Contenedor de pollo que compre con Rolando",
+      "precio": 30000
+    }
+ ]
+

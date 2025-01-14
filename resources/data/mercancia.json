@@ -1,0 +1,24 @@
+[
+  {
+    "id":1,
+    "nombre":"Paquete de pollo",
+    "cantidad":50,
+    "precio":10000
+  },
+    {
+    "id":2,
+    "nombre":"Saco de arroz",
+    "cantidad":45,
+    "precio":15000
+  },  {
+    "id":3,
+    "nombre":"Paquete de Salchichas",
+    "cantidad":70,
+    "precio":800
+  },  {
+    "id":4,
+    "nombre":"Aceite",
+    "cantidad":50,
+    "precio":1000
+  }
+]

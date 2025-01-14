@@ -1,0 +1,20 @@
+[
+  {
+    "id":"1",
+    "nombre":"Luis Daniel",
+    "centro":"La Pastora",
+    "salario":"1000",
+    "username":"lrmilian",
+    "contrasenna":"1234",
+    "permisos": ["contenedores","Vista Ventas","YEA"]
+  },
+  {
+    "id":"2",
+    "nombre":"Patricia",
+    "centro":"La Pastora",
+    "salario":"1000",
+    "username":"putri",
+    "contrasenna":"1234",
+    "permisos": ["contenedores","Vista Ventas","YEA"]
+  }
+]

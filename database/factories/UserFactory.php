@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
+ * @method \App\Models\User createOne($attributes = [])
+ * @method \App\Models\User|\Illuminate\Database\Eloquent\Collection create($attributes = [], \Illuminate\Database\Eloquent\Model|null $parent = null)
+ * @method \App\Models\User makeOne($attributes = [])
+ * @method \App\Models\User|\Illuminate\Database\Eloquent\Collection make($attributes = [], \Illuminate\Database\Eloquent\Model|null $parent = null)
+ * @method \App\Models\User newModel(array $attributes = [])
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
 class UserFactory extends Factory

@@ -1,6 +1,6 @@
 <?php
 
-use App\Operation;
+use App\Operations;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,7 +15,7 @@ return new class extends Migration
 
         Schema::create('product_operations', function (Blueprint $table) {
 
-            $posible_operations = array_map(fn($case)=> $case->name, Operation::cases());
+            $posible_operations = array_map(fn ($case) => $case->name, Operations::cases());
 
             $table->id();
             $table->timestamps();

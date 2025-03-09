@@ -1,0 +1,1 @@
+/home/asbel/projects/mipimefront/src/main.jsx

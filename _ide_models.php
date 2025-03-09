@@ -4,6 +4,7 @@ namespace App\Models
 {
     /**
      * @method static \IdeHelper\App\Models\__BillQuery query()
+     *
      * @mixin \IdeHelper\App\Models\__BillQuery
      */
     class Bill
@@ -11,16 +12,14 @@ namespace App\Models
         /**
          * Create a new Eloquent model instance.
          *
-         * @param  array  $attributes
          * @return void
-        */
-        public function __construct(array $attributes = [])
-        {
-        }
+         */
+        public function __construct(array $attributes = []) {}
     }
 
     /**
      * @method static \IdeHelper\App\Models\__DollarOperationQuery query()
+     *
      * @mixin \IdeHelper\App\Models\__DollarOperationQuery
      */
     class DollarOperation
@@ -28,16 +27,14 @@ namespace App\Models
         /**
          * Create a new Eloquent model instance.
          *
-         * @param  array  $attributes
          * @return void
-        */
-        public function __construct(array $attributes = [])
-        {
-        }
+         */
+        public function __construct(array $attributes = []) {}
     }
 
     /**
      * @method static \IdeHelper\App\Models\__OperationBillQuery query()
+     *
      * @mixin \IdeHelper\App\Models\__OperationBillQuery
      */
     class OperationBill
@@ -45,16 +42,14 @@ namespace App\Models
         /**
          * Create a new Eloquent model instance.
          *
-         * @param  array  $attributes
          * @return void
-        */
-        public function __construct(array $attributes = [])
-        {
-        }
+         */
+        public function __construct(array $attributes = []) {}
     }
 
     /**
      * @method static \IdeHelper\App\Models\__OperationProductQuery query()
+     *
      * @mixin \IdeHelper\App\Models\__OperationProductQuery
      */
     class OperationProduct
@@ -62,16 +57,14 @@ namespace App\Models
         /**
          * Create a new Eloquent model instance.
          *
-         * @param  array  $attributes
          * @return void
-        */
-        public function __construct(array $attributes = [])
-        {
-        }
+         */
+        public function __construct(array $attributes = []) {}
     }
 
     /**
      * @method static \IdeHelper\App\Models\__PermissionQuery query()
+     *
      * @mixin \IdeHelper\App\Models\__PermissionQuery
      */
     class Permission
@@ -79,16 +72,14 @@ namespace App\Models
         /**
          * Create a new Eloquent model instance.
          *
-         * @param  array  $attributes
          * @return void
-        */
-        public function __construct(array $attributes = [])
-        {
-        }
+         */
+        public function __construct(array $attributes = []) {}
     }
 
     /**
      * @method static \IdeHelper\App\Models\__ProductQuery query()
+     *
      * @mixin \IdeHelper\App\Models\__ProductQuery
      */
     class Product
@@ -96,16 +87,14 @@ namespace App\Models
         /**
          * Create a new Eloquent model instance.
          *
-         * @param  array  $attributes
          * @return void
-        */
-        public function __construct(array $attributes = [])
-        {
-        }
+         */
+        public function __construct(array $attributes = []) {}
     }
 
     /**
      * @method static \IdeHelper\App\Models\__StockBillQuery query()
+     *
      * @mixin \IdeHelper\App\Models\__StockBillQuery
      */
     class StockBill
@@ -113,16 +102,14 @@ namespace App\Models
         /**
          * Create a new Eloquent model instance.
          *
-         * @param  array  $attributes
          * @return void
-        */
-        public function __construct(array $attributes = [])
-        {
-        }
+         */
+        public function __construct(array $attributes = []) {}
     }
 
     /**
      * @method static \IdeHelper\App\Models\__StockDollarQuery query()
+     *
      * @mixin \IdeHelper\App\Models\__StockDollarQuery
      */
     class StockDollar
@@ -130,16 +117,14 @@ namespace App\Models
         /**
          * Create a new Eloquent model instance.
          *
-         * @param  array  $attributes
          * @return void
-        */
-        public function __construct(array $attributes = [])
-        {
-        }
+         */
+        public function __construct(array $attributes = []) {}
     }
 
     /**
      * @method static \IdeHelper\App\Models\__StockProductQuery query()
+     *
      * @mixin \IdeHelper\App\Models\__StockProductQuery
      */
     class StockProduct
@@ -147,16 +132,14 @@ namespace App\Models
         /**
          * Create a new Eloquent model instance.
          *
-         * @param  array  $attributes
          * @return void
-        */
-        public function __construct(array $attributes = [])
-        {
-        }
+         */
+        public function __construct(array $attributes = []) {}
     }
 
     /**
      * @method static \IdeHelper\App\Models\__SubsidiarieQuery query()
+     *
      * @mixin \IdeHelper\App\Models\__SubsidiarieQuery
      */
     class Subsidiarie
@@ -164,16 +147,14 @@ namespace App\Models
         /**
          * Create a new Eloquent model instance.
          *
-         * @param  array  $attributes
          * @return void
-        */
-        public function __construct(array $attributes = [])
-        {
-        }
+         */
+        public function __construct(array $attributes = []) {}
     }
 
     /**
      * @method static \IdeHelper\App\Models\__UserQuery query()
+     *
      * @mixin \IdeHelper\App\Models\__UserQuery
      */
     class User
@@ -181,12 +162,9 @@ namespace App\Models
         /**
          * Create a new Eloquent model instance.
          *
-         * @param  array  $attributes
          * @return void
-        */
-        public function __construct(array $attributes = [])
-        {
-        }
+         */
+        public function __construct(array $attributes = []) {}
     }
 }
 
@@ -210,9 +188,7 @@ namespace IdeHelper\App\Models
      * @method \App\Models\Bill sole(array|string $columns = ['*'])
      * @method \App\Models\Bill updateOrCreate(array $attributes, array $values = [])
      */
-    class __BillQuery extends \Illuminate\Database\Eloquent\Builder
-    {
-    }
+    class __BillQuery extends \Illuminate\Database\Eloquent\Builder {}
 
     /**
      * @method $this whereId(int|string $value)
@@ -240,9 +216,7 @@ namespace IdeHelper\App\Models
      * @method \App\Models\DollarOperation sole(array|string $columns = ['*'])
      * @method \App\Models\DollarOperation updateOrCreate(array $attributes, array $values = [])
      */
-    class __DollarOperationQuery extends \Illuminate\Database\Eloquent\Builder
-    {
-    }
+    class __DollarOperationQuery extends \Illuminate\Database\Eloquent\Builder {}
 
     /**
      * @method \App\Models\OperationBill create(array $attributes = [])
@@ -262,9 +236,7 @@ namespace IdeHelper\App\Models
      * @method \App\Models\OperationBill sole(array|string $columns = ['*'])
      * @method \App\Models\OperationBill updateOrCreate(array $attributes, array $values = [])
      */
-    class __OperationBillQuery extends \Illuminate\Database\Eloquent\Builder
-    {
-    }
+    class __OperationBillQuery extends \Illuminate\Database\Eloquent\Builder {}
 
     /**
      * @method \App\Models\OperationProduct create(array $attributes = [])
@@ -284,9 +256,7 @@ namespace IdeHelper\App\Models
      * @method \App\Models\OperationProduct sole(array|string $columns = ['*'])
      * @method \App\Models\OperationProduct updateOrCreate(array $attributes, array $values = [])
      */
-    class __OperationProductQuery extends \Illuminate\Database\Eloquent\Builder
-    {
-    }
+    class __OperationProductQuery extends \Illuminate\Database\Eloquent\Builder {}
 
     /**
      * @method $this whereId(int|string $value)
@@ -310,9 +280,7 @@ namespace IdeHelper\App\Models
      * @method \App\Models\Permission sole(array|string $columns = ['*'])
      * @method \App\Models\Permission updateOrCreate(array $attributes, array $values = [])
      */
-    class __PermissionQuery extends \Illuminate\Database\Eloquent\Builder
-    {
-    }
+    class __PermissionQuery extends \Illuminate\Database\Eloquent\Builder {}
 
     /**
      * @method $this whereId(int|string $value)
@@ -340,9 +308,7 @@ namespace IdeHelper\App\Models
      * @method \App\Models\Product sole(array|string $columns = ['*'])
      * @method \App\Models\Product updateOrCreate(array $attributes, array $values = [])
      */
-    class __ProductQuery extends \Illuminate\Database\Eloquent\Builder
-    {
-    }
+    class __ProductQuery extends \Illuminate\Database\Eloquent\Builder {}
 
     /**
      * @method \App\Models\StockBill create(array $attributes = [])
@@ -362,9 +328,7 @@ namespace IdeHelper\App\Models
      * @method \App\Models\StockBill sole(array|string $columns = ['*'])
      * @method \App\Models\StockBill updateOrCreate(array $attributes, array $values = [])
      */
-    class __StockBillQuery extends \Illuminate\Database\Eloquent\Builder
-    {
-    }
+    class __StockBillQuery extends \Illuminate\Database\Eloquent\Builder {}
 
     /**
      * @method \App\Models\StockDollar create(array $attributes = [])
@@ -384,9 +348,7 @@ namespace IdeHelper\App\Models
      * @method \App\Models\StockDollar sole(array|string $columns = ['*'])
      * @method \App\Models\StockDollar updateOrCreate(array $attributes, array $values = [])
      */
-    class __StockDollarQuery extends \Illuminate\Database\Eloquent\Builder
-    {
-    }
+    class __StockDollarQuery extends \Illuminate\Database\Eloquent\Builder {}
 
     /**
      * @method \App\Models\StockProduct create(array $attributes = [])
@@ -406,9 +368,7 @@ namespace IdeHelper\App\Models
      * @method \App\Models\StockProduct sole(array|string $columns = ['*'])
      * @method \App\Models\StockProduct updateOrCreate(array $attributes, array $values = [])
      */
-    class __StockProductQuery extends \Illuminate\Database\Eloquent\Builder
-    {
-    }
+    class __StockProductQuery extends \Illuminate\Database\Eloquent\Builder {}
 
     /**
      * @method $this whereId(int|string $value)
@@ -433,9 +393,7 @@ namespace IdeHelper\App\Models
      * @method \App\Models\Subsidiarie sole(array|string $columns = ['*'])
      * @method \App\Models\Subsidiarie updateOrCreate(array $attributes, array $values = [])
      */
-    class __SubsidiarieQuery extends \Illuminate\Database\Eloquent\Builder
-    {
-    }
+    class __SubsidiarieQuery extends \Illuminate\Database\Eloquent\Builder {}
 
     /**
      * @method $this whereId(int|string $value)
@@ -463,7 +421,5 @@ namespace IdeHelper\App\Models
      * @method \App\Models\User sole(array|string $columns = ['*'])
      * @method \App\Models\User updateOrCreate(array $attributes, array $values = [])
      */
-    class __UserQuery extends \Illuminate\Database\Eloquent\Builder
-    {
-    }
+    class __UserQuery extends \Illuminate\Database\Eloquent\Builder {}
 }

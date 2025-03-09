@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('workers', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->string("username")->unique();
-            $table->string("password");
+            $table->string('name');
+            $table->string('username')->unique();
+            $table->string('password');
 
-            $table->foreignId("center")->constrained(table: "centers");
+            $table->foreignId('center')->constrained(table: 'centers');
 
         });
     }

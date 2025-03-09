@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('centers', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->string("location")->unique();
-            $table->string("picture")->unique();
-            $table->string("horarious");
+            $table->string('name');
+            $table->string('location')->unique();
+            $table->string('picture')->unique();
+            $table->string('horarious');
         });
     }
 

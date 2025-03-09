@@ -1,9 +1,9 @@
 <?php
 
+use App\Permissions;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Permission;
 
 return new class extends Migration
 {
@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('permissions', function (Blueprint $table) {
 
-            $permissions = array_map(fn($case)=> $case->name, Permission::cases());
+            $permissions = array_map(fn ($case) => $case->name, Permissions::cases());
 
             $table->id();
             $table->timestamps();

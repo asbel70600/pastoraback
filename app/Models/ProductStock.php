@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -30,5 +31,10 @@ class ProductStock extends Model
     public function product(): HasOne
     {
         return $this->hasOne(Product::class);
+    }
+
+    public function subsidiary(): BelongsTo
+    {
+        return $this->belongsTo(Subsidiary::class);
     }
 }

@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('bill', function (Blueprint $table) {
             $table->id();
-            $table->integer("1");
-            $table->integer("5");
-            $table->integer("10");
-            $table->integer("20");
-            $table->integer("50");
-            $table->integer("100");
-            $table->integer("200");
-            $table->integer("500");
-            $table->integer("1000");
-            $table->decimal("card",12,2);
+            $table->integer('1');
+            $table->integer('5');
+            $table->integer('10');
+            $table->integer('20');
+            $table->integer('50');
+            $table->integer('100');
+            $table->integer('200');
+            $table->integer('500');
+            $table->integer('1000');
+            $table->decimal('card', 12, 2);
         });
     }
 

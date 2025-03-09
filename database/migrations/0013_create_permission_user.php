@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->foreignId('subsidiary_id')->constrained('subsidiaries');
+            $table->foreignId('permission_id')->constrained('permissions');
             $table->foreignId('user_id')->constrained('users');
         });
     }

@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('containers', function (Blueprint $table) {
             $table->id();
-            $table->decimal("recovered", 12, 2);
-            $table->decimal("paid", 12, 2);
-            $table->string("name");
-            $table->string("description");
+            $table->decimal('recovered', 12, 2);
+            $table->decimal('paid', 12, 2);
+            $table->string('name');
+            $table->string('description');
         });
     }
 

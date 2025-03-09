@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('dollars', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->dateTime("day");
-            $table->decimal("quantity",12,2);
-            $table->decimal("price",12,2);
-            $table->foreignId("center_id")->constrained(table: "centers");
+            $table->dateTime('day');
+            $table->decimal('quantity', 12, 2);
+            $table->decimal('price', 12, 2);
+            $table->foreignId('center_id')->constrained(table: 'centers');
         });
     }
 

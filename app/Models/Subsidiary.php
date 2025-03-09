@@ -3,15 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * 
- *
  * @property int $id
  * @property string $name
  * @property string $location
  * @property string $picture
  * @property string $schedule
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Subsidiary newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Subsidiary newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Subsidiary query()
@@ -20,9 +20,62 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Subsidiary whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Subsidiary wherePicture($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Subsidiary whereSchedule($value)
+ *
  * @mixin \Eloquent
  */
 class Subsidiary extends Model
 {
-    //
+    protected $fillable = [
+        'name',
+        'location',
+        'picture',
+        'schedule',
+    ];
+
+    /**
+     * @return HasMany<User,Subsidiary>
+     */
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class);
+    }
+
+    // Products
+    public function product_operations(): HasMany
+    {
+        return $this->hasMany(ProductOperation::class);
+    }
+
+    /**
+     * @return HasMany<Product,Subsidiary>
+     */
+    public function prducts_at_stock(): HasMany
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    // Bills
+    public function bills_at_stock(): HasMany
+    {
+        return $this->hasMany(BillStock::class);
+    }
+
+    /**
+     * @return HasMany<BillOperation,Subsidiary>
+     */
+    public function bill_operations(): HasMany
+    {
+        return $this->hasMany(BillOperation::class);
+    }
+
+    //Dollar
+    public function dolar_at_stock(): HasMany
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    public function dollar_operations(): HasMany
+    {
+        return $this->hasMany(Product::class);
+    }
 }

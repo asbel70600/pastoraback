@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as AuthUser;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at

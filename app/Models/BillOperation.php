@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
+ * 
+ *
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -17,7 +19,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $adjustment
  * @property string|null $description
  * @property int $denomination
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BillOperation newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BillOperation newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BillOperation query()
@@ -32,7 +33,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BillOperation whereSubsidiaryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BillOperation whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BillOperation whereUserId($value)
- *
+ * @property-read \App\Models\Subsidiary $subsidiary
  * @mixin \Eloquent
  */
 class BillOperation extends Model

@@ -9,3 +9,5 @@
 /*use App\Http\Controllers\Api\ProductStockController;*/
 /*use App\Http\Controllers\Api\SubsidiaryController;*/
 /*use App\Http\Controllers\Api\UserController;*/
+
+Route::get('/',function(){return view("welcome");});

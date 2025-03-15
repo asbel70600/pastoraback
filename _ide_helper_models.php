@@ -40,8 +40,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BillOperation whereSubsidiaryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BillOperation whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BillOperation whereUserId($value)
- * @mixin \Eloquent
  * @property-read \App\Models\Subsidiary $subsidiary
+ * @mixin \Eloquent
  */
 	class BillOperation extends \Eloquent {}
 }
@@ -65,8 +65,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BillStock whereQuantity($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BillStock whereSubsidiaryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BillStock whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property-read \App\Models\Subsidiary $subsidiary
+ * @mixin \Eloquent
  */
 	class BillStock extends \Eloquent {}
 }
@@ -94,8 +94,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DollarOperation whereSubsidiaryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DollarOperation whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DollarOperation whereUserId($value)
- * @mixin \Eloquent
  * @property-read \App\Models\Subsidiary $subsidiary
+ * @mixin \Eloquent
  */
 	class DollarOperation extends \Eloquent {}
 }
@@ -117,8 +117,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DollarStock whereQuantity($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DollarStock whereSubsidiaryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DollarStock whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property-read \App\Models\Subsidiary $subsidiary
+ * @mixin \Eloquent
  */
 	class DollarStock extends \Eloquent {}
 }
@@ -138,9 +138,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Permission whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Permission whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Permission whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $users
  * @property-read int|null $users_count
+ * @mixin \Eloquent
  */
 	class Permission extends \Eloquent {}
 }
@@ -168,11 +168,11 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product whereSalePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product whereWeight($value)
- * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProductOperation> $operations
  * @property-read int|null $operations_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProductStock> $stock
  * @property-read int|null $stock_count
+ * @mixin \Eloquent
  */
 	class Product extends \Eloquent {}
 }
@@ -204,9 +204,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductOperation whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductOperation whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductOperation whereUserId($value)
- * @mixin \Eloquent
  * @property-read \App\Models\Product|null $product
  * @property-read \App\Models\Subsidiary $subsidiary
+ * @mixin \Eloquent
  */
 	class ProductOperation extends \Eloquent {}
 }
@@ -230,9 +230,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductStock whereQuantity($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductStock whereSubsidiaryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductStock whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property-read \App\Models\Product|null $product
  * @property-read \App\Models\Subsidiary $subsidiary
+ * @mixin \Eloquent
  */
 	class ProductStock extends \Eloquent {}
 }
@@ -254,7 +254,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Subsidiary whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Subsidiary wherePicture($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Subsidiary whereSchedule($value)
- * @mixin \Eloquent
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\BillOperation> $bill_operations
@@ -273,6 +272,7 @@ namespace App\Models{
  * @property-read int|null $users_count
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Subsidiary whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Subsidiary whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 	class Subsidiary extends \Eloquent {}
 }
@@ -300,12 +300,12 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereSubsidiaryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Permission> $permissions
  * @property-read int|null $permissions_count
  * @property-read \App\Models\Subsidiary $subsidiary
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
+ * @mixin \Eloquent
  */
 	class User extends \Eloquent {}
 }

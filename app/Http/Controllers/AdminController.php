@@ -10,7 +10,6 @@ class AdminController extends Controller
     function index(){
         $worker = User::all()->toArray();
 
-
         $worker = array_map(function($user){
             $user["subsidiary"] = Subsidiary::whereId($user["subsidiary_id"])->firstOrFail()->name;
             return $user;

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
+ * 
+ *
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -14,7 +16,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property float $weight
  * @property string $buy_price
  * @property string $sale_price
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product query()
@@ -26,7 +27,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product whereSalePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product whereWeight($value)
- *
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProductOperation> $operations
+ * @property-read int|null $operations_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProductStock> $stock
+ * @property-read int|null $stock_count
  * @mixin \Eloquent
  */
 class Product extends Model

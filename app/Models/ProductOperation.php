@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
+ * 
+ *
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -17,7 +19,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string $type
  * @property int $adjustment
  * @property string|null $description
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductOperation newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductOperation newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductOperation query()
@@ -31,7 +32,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductOperation whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductOperation whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductOperation whereUserId($value)
- *
+ * @property-read \App\Models\Product|null $product
+ * @property-read \App\Models\Subsidiary $subsidiary
  * @mixin \Eloquent
  */
 class ProductOperation extends Model

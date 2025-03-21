@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Permission;
 use App\Models\Subsidiary;
 use App\Models\User;
 use App\Permissions;
+use Illuminate\Support\Facades\Log;
+use Psy\Readline\Hoa\Console;
 
 class AdminController extends Controller
 {
@@ -16,9 +19,25 @@ class AdminController extends Controller
             return $user;
         },$worker);
 
-        $worker = array_map(function(User $user){
-            $usermodel = User::whereId($user["id"])->firstOrFail();
-            $user["permissions"] = $usermodel->permissions->pluck('name')->toArray();
+        $worker = array_map(function($user){
+            $all_perm = array();
+
+            foreach (Permission::all()->unique()->pluck("name") as $p) {
+                $all_perm[$p] = false;
+            }
+
+            $user_perm = User::whereId($user["id"])
+                ->firstOrFail()
+                ->permissions
+                ->pluck('name')
+                ->toArray();
+
+            foreach ($user_perm as $p) {
+                $all_perm[$p] = true;
+            }
+
+            $user["permisos"] = $all_perm;
+
             return $user;
         },$worker);
 

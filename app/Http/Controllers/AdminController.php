@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Permission;
 use App\Models\Subsidiary;
 use App\Models\User;
-use App\Permissions;
-use Illuminate\Support\Facades\Log;
-use Psy\Readline\Hoa\Console;
+use Illuminate\Support\Facades\Request;
 
 class AdminController extends Controller
 {
@@ -15,7 +13,9 @@ class AdminController extends Controller
         $worker = User::all()->toArray();
 
         $worker = array_map(function($user){
-            $user["subsidiary"] = Subsidiary::whereId($user["subsidiary_id"])->firstOrFail()->name;
+            $user["subsidiary"] = Subsidiary::whereId($user["subsidiary_id"])
+                ->firstOrFail()
+                ->name;
             return $user;
         },$worker);
 
@@ -49,6 +49,10 @@ class AdminController extends Controller
         ];
 
         return response($resp,200);
+    }
+
+    function edit_user(Request $req){
+
     }
 
 }

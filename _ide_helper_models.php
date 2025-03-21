@@ -306,6 +306,8 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @mixin \Eloquent
+ * @property string $salary
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereSalary($value)
  */
 	class User extends \Eloquent {}
 }

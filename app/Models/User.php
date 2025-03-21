@@ -40,6 +40,14 @@ class User extends AuthUser
 {
     use HasApiTokens;
 
+    protected $fillable = [
+            "name",
+            "subsidiary_id",
+            "salary",
+            "email",
+            "password",
+    ];
+
     public function subsidiary(): BelongsTo
     {
         return $this->belongsTo(Subsidiary::class);

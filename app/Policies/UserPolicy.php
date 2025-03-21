@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
+use App\Permissions;
 
 class UserPolicy
 {
@@ -11,7 +12,11 @@ class UserPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        if ($user->permissions->contains('name', Permissions::vistaAdmin)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -19,7 +24,11 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return false;
+        if ($user->permissions->contains('name', Permissions::vistaAdmin)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -27,7 +36,11 @@ class UserPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        if ($user->permissions->contains('name', Permissions::editarTrab)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -35,7 +48,11 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        return false;
+        if ($user->permissions->contains('name', Permissions::editarTrab)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -43,7 +60,11 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        return false;
+        if ($user->permissions->contains('name', Permissions::editarTrab)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

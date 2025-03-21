@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Permission;
 use App\Models\Subsidiary;
 use App\Models\User;
-use App\Permissions as AppPermission;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -14,33 +13,56 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        $permissions = array_map(fn ($case) => $case->name, AppPermission::cases());
-        foreach ($permissions as $permission) {
-            Permission::create([
-                'name' => $permission,
-            ]);
-        }
+        $permissions_root = Permission::all()->unique()->pluck('id');
+        $permissions_seller = Permission::whereAny(['name'],'=',['vistaMercancia','vistaVentas','editarProd','editarUSD'])->pluck('id');
 
-        $permissionids = Permission::all()->unique()->pluck('id');
-
+        $pictures = 'localhost:8000/storage';
         $subs = Subsidiary::create([
-            'name' => 'eso',
+            'name' => 'Pastora',
             'location' => 'there /e there and there',
-            'picture' => '/centers/image/eso.png',
+            'picture' => $pictures.'/pastora.webp',
             'schedule' => '8-12',
         ]);
 
+        $subs2 = Subsidiary::create([
+            'name' => 'Otro',
+            'location' => 'there /e there and otherthere',
+            'picture' => $pictures.'/otro.jpg',
+            'schedule' => '8-12',
+        ]);
+
+        // TODO: add salary to workers
         $user = User::create([
             'name' => 'root',
+            'salary' => '1000',
             'email' => 'root@root.com',
             'password' => Hash::make('root'),
             'subsidiary_id' => $subs->id,
         ]);
-
-        $user->permissions()->attach($permissionids);
+        $user->permissions()->attach($permissions_root);
         $user->save();
 
-        $pictures = 'localhost:8000/storage';
+        $user = User::create([
+            'name' => 'seller',
+            'salary' => '1000',
+            'email' => 'seller@seller.com',
+            'password' => Hash::make('seller'),
+            'subsidiary_id' => $subs->id,
+        ]);
+        $user->permissions()->attach($permissions_seller);
+        $user->save();
+
+        $user = User::create([
+            'name' => 'seller2',
+            'salary' => '1000',
+            'email' => 'seller2@seller.com',
+            'password' => Hash::make('seller'),
+            'subsidiary_id' => $subs->id,
+        ]);
+        $user->permissions()->attach($permissions_seller);
+        $user->save();
+
+
         $products = [
             ['name' => 'Product A', 'weight' => 1.2, 'buy_price' => 10.00, 'sale_price' => 12.50, 'picture' => $pictures.'/A.jpg'],
             ['name' => 'Product B', 'weight' => 0.8, 'buy_price' => 8.00, 'sale_price' => 10.00, 'picture' => $pictures.'/B.jpg'],

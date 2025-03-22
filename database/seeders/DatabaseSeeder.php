@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Permission;
 use App\Models\Subsidiary;
 use App\Models\User;
+use App\Permissions;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -13,6 +14,14 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+
+        $permissions = array_map(fn ($case) => $case->name, Permissions::cases());
+        foreach ($permissions as $permission) {
+            Permission::create([
+                'name' => $permission,
+            ]);
+        }
+
         $permissions_root = Permission::all()->unique()->pluck('id');
         $permissions_seller = Permission::whereAny(['name'],'=',['vistaMercancia','vistaVentas','editarProd','editarUSD'])->pluck('id');
 
@@ -64,11 +73,41 @@ class DatabaseSeeder extends Seeder
 
 
         $products = [
-            ['name' => 'Product A', 'weight' => 1.2, 'buy_price' => 10.00, 'sale_price' => 12.50, 'picture' => $pictures.'/A.jpg'],
-            ['name' => 'Product B', 'weight' => 0.8, 'buy_price' => 8.00, 'sale_price' => 10.00, 'picture' => $pictures.'/B.jpg'],
-            ['name' => 'Product C', 'weight' => 2.0, 'buy_price' => 15.00, 'sale_price' => 18.00, 'picture' => $pictures.'/C.jpg'],
-            ['name' => 'Product D', 'weight' => 1.5, 'buy_price' => 12.00, 'sale_price' => 14.00, 'picture' => $pictures.'/D.jpg'],
-            ['name' => 'Product E', 'weight' => 1.1, 'buy_price' => 9.50, 'sale_price' => 11.50, 'picture' => $pictures.'/E.jpg'],
+            ['name' => 'Product A',
+                'weight' => 1.2,
+                'measure_unit' => 'lb',
+                'buy_price' => 10.00,
+                'sale_price' => 12.50,
+                'picture' => $pictures.'/A.jpg'],
+
+            ['name' => 'Product B',
+                'weight' => 0.8,
+                'measure_unit' => 'lb',
+                'buy_price' => 8.00,
+                'sale_price' => 10.00,
+                'picture' => $pictures.'/B.jpg'],
+
+            ['name' => 'Product C',
+                'weight' => 2.0,
+                'measure_unit' => 'lb',
+                'buy_price' => 15.00,
+                'sale_price' => 18.00,
+                'picture' => $pictures.'/C.jpg'],
+
+            ['name' => 'Product D',
+                'weight' => 1.5,
+                'measure_unit' => 'lb',
+                'buy_price' => 12.00,
+                'sale_price' => 14.00,
+                'picture' => $pictures.'/D.jpg'],
+
+            ['name' => 'Product E',
+                'measure_unit' => 'lb',
+                'weight' => 1.1,
+                'buy_price' => 9.50,
+                'sale_price' => 11.50,
+                'picture' => $pictures.'/E.jpg'],
+
         ];
 
         DB::table('products')->insert($products);

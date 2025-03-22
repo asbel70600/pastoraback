@@ -31,6 +31,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read int|null $operations_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProductStock> $stock
  * @property-read int|null $stock_count
+ * @property string $measure_unit
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Product whereMeasureUnit($value)
  * @mixin \Eloquent
  */
 class Product extends Model

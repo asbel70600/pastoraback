@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as AuthUser;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -34,6 +34,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @property-read \App\Models\Subsidiary $subsidiary
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
+ * @property string $salary
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereSalary($value)
  * @mixin \Eloquent
  */
 class User extends AuthUser

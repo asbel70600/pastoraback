@@ -19,8 +19,8 @@ Route::delete('ventas', [ProductController::class, 'delete'])->middleware('auth:
 
 
 Route::get('admin',[AdminController::class,'index'])->middleware('auth:sanctum');
-Route::post('admin/trabajadores',[UserController::class,'store'])->middleware('auth:sanctum');
-Route::post('admin/trabajadores/{id}',[UserController::class,'update'])->middleware('auth:sanctum');
+Route::post('trabajadores',[UserController::class,'store'])->middleware('auth:sanctum');
+Route::post('trabajadores/{id}',[UserController::class,'update'])->middleware('auth:sanctum');
 
 Route::get('logout', function(Request $request){
     $request->session()->invalidate();

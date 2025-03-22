@@ -14,15 +14,9 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
-    public function index(Request $request)
+    public function store(Request $request)
     {
-        $users = User::paginate();
-
-        return UserResource::collection($users);
-    }
-
-    public function store(Request $request): User
-    {
+        // TODO: Add auth check
         /*if (Auth::user()->cannot('create',User::class)){*/
         /*    abort(403);*/
         /*}*/
@@ -32,6 +26,7 @@ class UserController extends Controller
         /*});*/
         /*"permisos" => "array|contains:$permission_list",*/
 
+        // TODO: Validate permission_list
         $val = $request->validate([
             "nombre" => "required|string",
             "centro" => "required|exists:App\Models\Subsidiary,id",
@@ -55,35 +50,68 @@ class UserController extends Controller
 
         $new_user->permissions()->attach($permissions);
         $new_user->save();
-
-        return User::create($request->validated());
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(User $user): User
+    public function update(Request $request, $user_id)
     {
-        return $user;
-    }
+       // TODO: Add auth check
+        /*if (Auth::user()->cannot('create',User::class)){*/
+        /*    abort(403);*/
+        /*}*/
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UserRequest $request, User $user): User
-    {
-        $user->update($request->validated());
+        /*$permission_list = array_reduce(Permissions::cases(),function($carry,$item){*/
+        /*    return $carry."$item,";*/
+        /*});*/
+        /*"permisos" => "array|contains:$permission_list",*/
 
-        /*$val = $request->validate([*/
-        /*    "id" => "",*/
-        /*    "nombre" => "",*/
-        /*    "centro" => "",*/
-        /*    "salario" => "",*/
-        /*    "username" => "",*/
-        /*    "contrasenna" => "",*/
-        /*    "permisos" => "",*/
-        /*]);*/
-        return $user;
+        $user = User::whereId($user_id);
+        if (!$user){
+            return response([
+                "error" => "El usuario a modificar no exitste"
+            ],304);
+        }
+
+        // TODO: Validate permission_list
+        $val = $request->validate([
+            "id" => "required|exists:App\Models\User,id",
+            "nombre" => "string",
+            "centro" => "exists:App\Models\Subsidiary,id",
+            "salario" => "numeric",
+            "username" => "regex:/[a-zA-Z0-9]+/",
+            "password" => "string",
+            "permisos" => "array",
+        ]);
+
+        Log::alert($val["permisos"]);
+
+        $updated_user = User::whereId($val["id"])->firstOrFail();
+
+        $sucess = $updated_user->update([
+            "name" => $val["nombre"],
+            "subsidiary_id" => $val["centro"],
+            "salary" => $val["salario"],
+            "email" => $val["username"],
+            "password" => $val["password"],
+        ]);
+
+        $permissions = Permission::whereAny(['name'],'=',$val["permisos"])->pluck('id');
+
+        if (!$sucess){
+            return response([
+                "error" => "no su pudo actualizar el usuario"
+            ],304);
+        }
+
+        $updated_user->permissions()->attach($permissions);
+        $sucess = $updated_user->save();
+
+        if (!$sucess){
+            return response([
+                "error" => "no su pudo actualizar el usuario"
+            ],304);
+        }
+
+        return response($updated_user->toJson(),200);
     }
 
     public function destroy(User $user): Response

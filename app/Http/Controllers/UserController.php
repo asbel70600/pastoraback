@@ -109,7 +109,7 @@ class UserController extends Controller
     public function destroy(Request $req): Response
     {
         $val = $req->validate([
-            "id" => "exists:App\Models\User,id",
+            "id" => "required|exists:App\Models\User,id",
         ]);
         $u = User::whereId($val["id"])->firstOrFail();
         $u->update([

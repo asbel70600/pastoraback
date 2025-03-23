@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('subsidiary_id')->constrained('subsidiaries');
             $table->decimal('salary');
             $table->string('password');
+            $table->boolean("hidden")->default(false);
             $table->rememberToken();
         });
 

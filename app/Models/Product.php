@@ -33,6 +33,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read int|null $stock_count
  * @property string $measure_unit
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product whereMeasureUnit($value)
+ * @property int $hidden
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Product whereHidden($value)
  * @mixin \Eloquent
  */
 class Product extends Model
@@ -43,6 +45,7 @@ class Product extends Model
         "buy_price",
         "weight",
         "picture",
+        "hidden",
     ];
 
     public function operations(): HasMany

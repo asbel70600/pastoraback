@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserRequest;
-use App\Http\Resources\UserResource;
 use App\Models\Permission;
 use App\Models\User;
-use App\Permissions;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Validation\Rule;
+
+const renameMap = [
+            "nombre" => "name",
+            "centro" => "subsidiary_id",
+            "salario" => "salary",
+            "username" => "email",
+            "password" => "password",
+            "permisos" => "permissions"
+        ];
 
 class UserController extends Controller
 {
@@ -31,7 +36,7 @@ class UserController extends Controller
             "nombre" => "required|string",
             "centro" => "required|exists:App\Models\Subsidiary,id",
             "salario" => "required|numeric",
-            "username" => "required|regex:/[a-zA-Z0-9]+/",
+            "username" => "required|regex:/[a-zA-Z0-9]+/|unique:\App\Models\User,email",
             "password" => "required|string",
             "permisos" => "required",
         ]);
@@ -52,7 +57,7 @@ class UserController extends Controller
         $new_user->save();
     }
 
-    public function update(Request $request, $user_id)
+    public function update(Request $request)
     {
        // TODO: Add auth check
         /*if (Auth::user()->cannot('create',User::class)){*/
@@ -64,60 +69,53 @@ class UserController extends Controller
         /*});*/
         /*"permisos" => "array|contains:$permission_list",*/
 
-        $user = User::whereId($user_id);
-        if (!$user){
-            return response([
-                "error" => "El usuario a modificar no exitste"
-            ],304);
-        }
-
         // TODO: Validate permission_list
+
         $val = $request->validate([
             "id" => "required|exists:App\Models\User,id",
             "nombre" => "string",
             "centro" => "exists:App\Models\Subsidiary,id",
             "salario" => "numeric",
-            "username" => "regex:/[a-zA-Z0-9]+/",
+            "username" => "regex:/[a-zA-Z0-9]+/|unique:\App\Models\User,email",
             "password" => "string",
             "permisos" => "array",
         ]);
 
-        Log::alert($val["permisos"]);
+        $updated_user = User::whereId($val["id"])->first();
 
-        $updated_user = User::whereId($val["id"])->firstOrFail();
+        if (isset($val["permisos"])){
+            $permissions = $val["permisos"];
+            $permissions = Permission::whereAny(['name'],'=',$val["permisos"])->pluck('id');
+            $updated_user->permissions()->attach($permissions);
+        }
 
         $sucess = $updated_user->update([
-            "name" => $val["nombre"],
-            "subsidiary_id" => $val["centro"],
-            "salary" => $val["salario"],
-            "email" => $val["username"],
-            "password" => $val["password"],
+            "name" => $val["nombre"] ?? $updated_user->name,
+            "subsidiary_id" => $val["centro"] ?? $updated_user->subsidiary_id,
+            "salary" => $val["salario"] ?? $updated_user->salary,
+            "email" => $val["username"] ?? $updated_user->email,
+            "password" => $val["password"] ?? $updated_user->password,
         ]);
 
-        $permissions = Permission::whereAny(['name'],'=',$val["permisos"])->pluck('id');
-
         if (!$sucess){
             return response([
                 "error" => "no su pudo actualizar el usuario"
             ],304);
         }
 
-        $updated_user->permissions()->attach($permissions);
-        $sucess = $updated_user->save();
-
-        if (!$sucess){
-            return response([
-                "error" => "no su pudo actualizar el usuario"
-            ],304);
-        }
-
-        return response($updated_user->toJson(),200);
+        return response($updated_user->toJson());
     }
 
-    public function destroy(User $user): Response
+    public function destroy(Request $req): Response
     {
-        $user->delete();
+        $val = $req->validate([
+            "id" => "exists:App\Models\User,id",
+        ]);
+        $u = User::whereId($val["id"])->firstOrFail();
+        $u->update([
+            "hidden" => true,
+        ]);
 
-        return response()->noContent();
+        return response($u->toJson());
     }
 }

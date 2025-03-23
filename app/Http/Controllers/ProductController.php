@@ -16,7 +16,7 @@ class ProductController extends Controller
             abort(403);
         }
 
-        $products = Product::all();
+        $products = Product::all()->where("hidden",false);
         $products = $products->toArray();
         return $products;
     }
@@ -64,7 +64,9 @@ class ProductController extends Controller
         if ($request->user()->cannot('delete', $prod)) {
             abort(403, "You don't have authorization to delete this product");
         } else {
-            $prod->delete();
+            $prod->update([
+                "hidden" => true,
+            ]);
         }
 
         return response([], 200);

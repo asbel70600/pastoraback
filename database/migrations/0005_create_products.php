@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('name');
             $table->float('weight');
             $table->string('measure_unit');
+            $table->boolean("hidden")->default(false);
 
             $table->decimal('buy_price', total: 12, places: 2);
             $table->decimal('sale_price', total: 12, places: 2);

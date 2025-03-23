@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Permission;
 use App\Models\Subsidiary;
 use App\Models\User;
-use Illuminate\Support\Facades\Request;
 
 class AdminController extends Controller
 {
     function index(){
-        $worker = User::all()->toArray();
+        $worker = User::all()->where("hidden",false)->toArray();
 
         $worker = array_map(function($user){
             $user["subsidiary"] = Subsidiary::whereId($user["subsidiary_id"])
@@ -49,10 +48,6 @@ class AdminController extends Controller
         ];
 
         return response($resp,200);
-    }
-
-    function edit_user(Request $req){
-
     }
 
 }

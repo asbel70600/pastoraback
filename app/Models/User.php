@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as AuthUser;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -29,13 +29,15 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereSubsidiaryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereSalary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereHidden($value)
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Permission> $permissions
  * @property-read int|null $permissions_count
  * @property-read \App\Models\Subsidiary $subsidiary
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @property string $salary
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereSalary($value)
+ * @property int $hidden
  * @mixin \Eloquent
  */
 class User extends AuthUser
@@ -48,6 +50,7 @@ class User extends AuthUser
             "salary",
             "email",
             "password",
+            "hidden",
     ];
 
     public function subsidiary(): BelongsTo

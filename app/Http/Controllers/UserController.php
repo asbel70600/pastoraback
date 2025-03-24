@@ -8,6 +8,7 @@ use App\Permissions;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 
 const renameMap = [
             "nombre" => "name",
@@ -79,23 +80,28 @@ class UserController extends Controller
             "nombre" => "string",
             "centro" => "exists:App\Models\Subsidiary,id",
             "salario" => "numeric",
-            "username" => "regex:/[a-zA-Z0-9]+/|unique:\App\Models\User,email",
+            "username" => "string",
             "password" => "string",
             "permisos" => "array",
             ]
         );
 
-        $updated_user = User::whereId($val["id"])->first();
+        $updated_user = User::whereId($val["id"])->firstOrFail();
+        $updated_user->name = $val["nombre"] ?? $updated_user->name;
+        $updated_user->subsidiary_id = $val["centro"] ?? $updated_user->subsidiary_id;
+        $updated_user->salary = $val["salario"] ?? $updated_user->salary;
+        $updated_user->email = $val["username"] ?? $updated_user->email;
 
-        $sucess = $updated_user->update(
-            [
-            "name" => $val["nombre"] ?? $updated_user->name,
-            "subsidiary_id" => $val["centro"] ?? $updated_user->subsidiary_id,
-            "salary" => $val["salario"] ?? $updated_user->salary,
-            "email" => $val["username"] ?? $updated_user->email,
-            "password" => $val["password"] ?? $updated_user->password,
-            ]
-        );
+        if(isset($val["username"]) && $val["username"] != $updated_user->email) {
+            if (!User::whereEmail($val["username"])->exists) {
+                $updated_user->email = $val["username"];
+            } else {
+                return response(["message" => "El nombre de usuario ya está en uso"], 422);
+            }
+        }
+        if(isset($val["password"])) {
+            $updated_user->password = Hash::make($val["password"]);
+        }
 
         if (isset($val["permisos"])) {
             $permissions = array_map(fn ($case) => $case->name, Permissions::cases());
@@ -112,14 +118,7 @@ class UserController extends Controller
             $updated_user->permissions()->attach($permissions);
         }
 
-
-        if (!$sucess) {
-            return response(
-                [
-                "message" => "no su pudo actualizar el usuario"
-                ], 422
-            );
-        }
+        $updated_user->save();
 
         return response($updated_user->toJson());
     }

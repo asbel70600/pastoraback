@@ -33,14 +33,13 @@ class DatabaseSeeder extends Seeder
             'schedule' => '8-12',
         ]);
 
-        $subs2 = Subsidiary::create([
+        Subsidiary::create([
             'name' => 'Otro',
             'location' => 'there /e there and otherthere',
             'picture' => $pictures.'/otro.jpg',
             'schedule' => '8-12',
         ]);
 
-        // TODO: add salary to workers
         $user = User::create([
             'name' => 'root',
             'salary' => '1000',

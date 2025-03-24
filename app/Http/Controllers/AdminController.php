@@ -43,7 +43,7 @@ class AdminController extends Controller
         $subs = Subsidiary::all();
 
         $resp = [
-            "workers"=>$worker,
+            "workers"=>array_values($worker),
             "subsidiaries" => $subs,
         ];
 

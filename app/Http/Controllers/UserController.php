@@ -20,54 +20,61 @@ const renameMap = [
 
 class UserController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request):Response
     {
-        if (Auth::user()->cannot('create',User::class)){
+        if (Auth::user()->cannot('create', User::class)) {
             abort(403);
         }
 
 
-        $val = $request->validate([
+        $val = $request->validate(
+            [
             "nombre" => "required|string",
             "centro" => "required|exists:App\Models\Subsidiary,id",
             "salario" => "required|numeric",
             "username" => "required|regex:/[a-zA-Z0-9]+/|unique:\App\Models\User,email",
             "password" => "required|string",
             "permisos" => "required",
-        ]);
+            ]
+        );
 
-        $new_user = new User([
+        $new_user = new User(
+            [
             "name" => $val["nombre"],
             "subsidiary_id" => $val["centro"],
             "salary" => $val["salario"],
             "email" => $val["username"],
             "password" => $val["password"],
-        ]);
+            ]
+        );
 
-        if (isset($val["permisos"])){
+        if (isset($val["permisos"])) {
             $permissions = array_map(fn ($case) => $case->name, Permissions::cases());
 
-            if (array_diff(array_keys($val["permisos"]),array_values($permissions)) != []){
-                return response([
+            if (array_diff(array_keys($val["permisos"]), array_values($permissions)) != []) {
+                return response(
+                    [
                     "message" => "Malformed request permissions"
-                ],422);
+                    ], 422
+                );
             }
 
-            $permissions = Permission::whereAny(['name'],'=',$val["permisos"])->pluck('id');
+            $permissions = Permission::whereAny(['name'], '=', $val["permisos"])->pluck('id');
             $new_user->permissions()->attach($permissions);
         }
 
         $new_user->save();
-        return response($new_user->toJson(),200);
+        return response($new_user->toJson(), 200);
     }
 
-    public function update(Request $request)
+    public function update(Request $request):Response
     {
-        if (Auth::user()->cannot('update',User::class)){
+        if (Auth::user()->cannot('update', User::class)) {
             abort(403);
         }
 
-        $val = $request->validate([
+        $val = $request->validate(
+            [
             "id" => "required|exists:App\Models\User,id",
             "nombre" => "string",
             "centro" => "exists:App\Models\Subsidiary,id",
@@ -75,36 +82,43 @@ class UserController extends Controller
             "username" => "regex:/[a-zA-Z0-9]+/|unique:\App\Models\User,email",
             "password" => "string",
             "permisos" => "array",
-        ]);
+            ]
+        );
 
         $updated_user = User::whereId($val["id"])->first();
 
-        $sucess = $updated_user->update([
+        $sucess = $updated_user->update(
+            [
             "name" => $val["nombre"] ?? $updated_user->name,
             "subsidiary_id" => $val["centro"] ?? $updated_user->subsidiary_id,
             "salary" => $val["salario"] ?? $updated_user->salary,
             "email" => $val["username"] ?? $updated_user->email,
             "password" => $val["password"] ?? $updated_user->password,
-        ]);
+            ]
+        );
 
-        if (isset($val["permisos"])){
+        if (isset($val["permisos"])) {
             $permissions = array_map(fn ($case) => $case->name, Permissions::cases());
 
-            if (array_diff(array_keys($val["permisos"]),array_values($permissions)) != []){
-                return response([
+            if (array_diff(array_keys($val["permisos"]), array_values($permissions)) != []) {
+                return response(
+                    [
                     "message" => "Malformed request permissions"
-                ],422);
+                    ], 422
+                );
             }
 
-            $permissions = Permission::whereAny(['name'],'=',$val["permisos"])->pluck('id');
+            $permissions = Permission::whereAny(['name'], '=', $val["permisos"])->pluck('id');
             $updated_user->permissions()->attach($permissions);
         }
 
 
-        if (!$sucess){
-            return response([
+        if (!$sucess) {
+            return response(
+                [
                 "message" => "no su pudo actualizar el usuario"
-            ],422);
+                ], 422
+            );
         }
 
         return response($updated_user->toJson());
@@ -112,18 +126,22 @@ class UserController extends Controller
 
     public function destroy(Request $req): Response
     {
-        if (Auth::user()->cannot('delete',User::class)){
+        if (Auth::user()->cannot('delete', User::class)) {
             abort(403);
         }
 
-        $val = $req->validate([
+        $val = $req->validate(
+            [
             "id" => "required|exists:App\Models\User,id",
-        ]);
+            ]
+        );
 
         $u = User::whereId($val["id"])->firstOrFail();
-        $u->update([
+        $u->update(
+            [
             "hidden" => true,
-        ]);
+            ]
+        );
 
         return response($u->toJson());
     }

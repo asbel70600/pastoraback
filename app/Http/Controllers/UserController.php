@@ -78,7 +78,7 @@ class UserController extends Controller
             [
             "id" => "required|exists:App\Models\User,id",
             "nombre" => "string",
-            "centro" => "exists:App\Models\Subsidiary,id",
+            "centroId" => "exists:App\Models\Subsidiary,id",
             "salario" => "numeric",
             "username" => "string",
             "password" => "string",

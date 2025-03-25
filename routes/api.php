@@ -20,7 +20,7 @@ Route::post('products', [ProductController::class, 'create'])->middleware('auth:
 Route::post('products/editar', [ProductController::class, 'update'])->middleware('auth:sanctum');
 Route::delete('products', [ProductController::class, 'delete'])->middleware('auth:sanctum');
 
-Route::get('sale', [])->('auth:sanctum');
+/*Route::get('sale', [])->('auth:sanctum');*/
 
 
 Route::get('admin', [AdminController::class,'index'])->middleware('auth:sanctum');

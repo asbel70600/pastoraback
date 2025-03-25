@@ -24,3 +24,4 @@ yarn-error.log
 database/.idea
 database/.idea
 _ide*
+.phpstorm*

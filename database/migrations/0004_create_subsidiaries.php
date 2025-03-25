@@ -8,14 +8,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('subsidiaries', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string('name');
-            $table->string('location')->unique();
-            $table->string('picture')->unique();
-            $table->string('schedule');
-        });
+        Schema::create(
+            'subsidiaries', function (Blueprint $table) {
+                $table->id();
+                $table->timestamps();
+                $table->string('name');
+                $table->string('location');
+                $table->string('picture')->nullable();
+                $table->string('schedule');
+            }
+        );
     }
 
     public function down(): void

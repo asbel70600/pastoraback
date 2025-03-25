@@ -15,10 +15,12 @@ Route::get(
     }
 );
 
-Route::get('ventas', [ProductController::class, 'index'])->middleware('auth:sanctum');
-Route::post('ventas', [ProductController::class, 'create'])->middleware('auth:sanctum');
-Route::post('ventas/editar', [ProductController::class, 'update'])->middleware('auth:sanctum');
-Route::delete('ventas', [ProductController::class, 'delete'])->middleware('auth:sanctum');
+Route::get('products', [ProductController::class, 'index'])->middleware('auth:sanctum');
+Route::post('products', [ProductController::class, 'create'])->middleware('auth:sanctum');
+Route::post('products/editar', [ProductController::class, 'update'])->middleware('auth:sanctum');
+Route::delete('products', [ProductController::class, 'delete'])->middleware('auth:sanctum');
+
+Route::get('sale', [])->('auth:sanctum');
 
 
 Route::get('admin', [AdminController::class,'index'])->middleware('auth:sanctum');
@@ -28,6 +30,9 @@ Route::patch('trabajadores', [UserController::class,'update'])->middleware('auth
 Route::delete('trabajadores', [UserController::class,'destroy'])->middleware('auth:sanctum');
 
 Route::post('centros', [SubsidiaryController::class,'store'])->middleware('auth:sanctum');
+Route::delete('centros', [SubsidiaryController::class,'destroy'])->middleware('auth:sanctum');
+
+/*Route::get*/
 
 Route::get(
     'logout', function (Request $request) {

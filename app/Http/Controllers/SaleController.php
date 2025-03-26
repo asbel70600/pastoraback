@@ -2,9 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Currencies;
+use App\Mediums;
+use App\Models\BillOperation;
+use App\Models\DollarStock;
+use App\Models\ProductOperation;
+use App\Models\ProductStock;
 use App\Models\Subsidiary;
+use App\Operations;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Nette\Utils\Strings;
+use PhpParser\Node\Stmt\Foreach_;
+use Ramsey\Uuid\Type\Integer;
 
 class SaleController extends Controller
 {
@@ -13,30 +24,59 @@ class SaleController extends Controller
     {
         $val = $request->validate(
             [
-            'products' => 'required|array',
-            'total' => 'required|number',
-            'direccion' => 'required|string',
+            'productos' => 'array',
+            'productos.*.cantidad' => 'required|integer',
+            'productos.*.id' => 'required|exists:App\Models\Product,id',
+            'productos.*.precio' => 'required|numeric',
+            'costo' => 'required|number',
+            'denominaciones' => 'required|array',
+            'ajuste' => 'required|bool'
             ]
         );
 
+        foreach($val["productos"] as $prod){
+            $op = new ProductOperation();
+            $op->product_id = $prod["id"];
+            $op->user_id = Auth::user()->id;
+            $op->subsidiary_id = Auth::user()->subsidiary_id;
+            $op->amount = $prod["cantidad"];
+            $op->adjustment = $val["ajuste"];
+            $op->description = $val["descripcion"];
+            $op->type = Operations::out;
+            $op->save();
 
-        $p = new Subsidiary;
-        $p->name = $val["nombre"];
-        $p->schedule = $val["horario"];
-        $p->location = $val["direccion"];
-
-        if(isset($val["image"])) {
-            $path = $val["image"]->storePublicly("images");
-            $path = str_replace("images", "storage", $path);
-            $p->picture = 'localhost:8000/' . $path;
+            $stock = ProductStock::whereProductId($prod["id"])->whereSubsidiaryId($op->subsidiary_id)->firstOrCreate();
+            $newquantity = $stock->quantity - $op->amount;
+            $stock->quantity = ($newquantity) >= 0 ? $newquantity : 0;
+            $stock->save();
         }
 
+        foreach($val["denominaciones"] as $den){
+            $op = new BillOperation();
+            $op->subsidiary_id = Auth::user()->subsidiary_id;
+            $op->user_id = Auth::user()->id;
+            $op->amount = $den["cantidad"];
+            $op->operation = Operations::in;
+            $op->adjustment = $val["ajuste"];
+            $op->description = $val["descripcion"];
 
-        if ($p->save()) {
-            return response($p, 200);
-        } else {
-            return response($p, 405);
+            if(array_key_first($den) == "transferencia") {
+                $op->medium = Mediums::card;
+                $op->currency = Currencies::cup;
+            }elseif(array_key_first($den) == "usd") {
+                $op->medium = Mediums::cash;
+                $op->currency = Currencies::usd;
+            }else{
+                $op->denomination = intval(array_key_first($den));
+            }
+            $op->save();
+
+            $stock = DollarStock::whereSubsidiaryId(Auth::user()->subsidiary_id)->where('denomination', $op->denomination)->where('medium', $op->medium)->where('currency', $op->currency)->firstOrCreate();
+            $stock->quantity += $op->amount;
+            $stock->save();
+
         }
+
     }
 
     public function destroy(Request $request): Response

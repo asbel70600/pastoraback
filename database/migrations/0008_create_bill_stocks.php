@@ -1,5 +1,7 @@
 <?php
 
+use App\Currencies;
+use App\Mediums;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,14 +14,21 @@ return new class extends Migration
     public function up(): void
     {
 
-        Schema::create('bill_stocks', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create(
+            'bill_stocks', function (Blueprint $table) {
+                $posible_mediums = array_map(fn ($case) => $case->name, Mediums::cases());
+                $posible_currencies  = array_map(fn ($case) => $case->name, Currencies::cases());
 
-            $table->foreignId('subsidiary_id')->constrained('subsidiaries');
-            $table->integer('dennomination');
-            $table->float('quantity');
-        });
+                $table->id();
+                $table->timestamps();
+
+                $table->foreignId('subsidiary_id')->constrained('subsidiaries');
+                $table->enum('medium', $posible_mediums);
+                $table->enum('currency', $posible_currencies);
+                $table->float('quantity');
+                $table->integer('denomination')->nullable();
+            }
+        );
     }
 
     /**

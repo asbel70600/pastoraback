@@ -34,6 +34,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BillOperation whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BillOperation whereUserId($value)
  * @property-read \App\Models\Subsidiary $subsidiary
+ * @property string $currency
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BillOperation whereCurrency($value)
  * @mixin \Eloquent
  */
 class BillOperation extends Model

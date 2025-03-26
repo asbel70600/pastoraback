@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Currencies;
 use App\Mediums;
 use App\Models\BillOperation;
+use App\Models\BillStock;
 use App\Models\DollarStock;
+use App\Models\Product;
 use App\Models\ProductOperation;
 use App\Models\ProductStock;
 use App\Models\Subsidiary;
@@ -13,9 +15,11 @@ use App\Operations;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 use Nette\Utils\Strings;
 use PhpParser\Node\Stmt\Foreach_;
 use Ramsey\Uuid\Type\Integer;
+use Validator;
 
 class SaleController extends Controller
 {
@@ -24,15 +28,22 @@ class SaleController extends Controller
     {
         $val = $request->validate(
             [
-            'productos' => 'array',
+                'productos' => 'array',
+                'costo' => 'required|numeric',
+                'billetes' => 'required|array',
+                'ajuste' => 'required|bool',
+                'descripcion' => 'string',
+            ]
+        );
+
+        $val_prod = Validator::make(
+            $request->all(), [
             'productos.*.cantidad' => 'required|integer',
             'productos.*.id' => 'required|exists:App\Models\Product,id',
             'productos.*.precio' => 'required|numeric',
-            'costo' => 'required|number',
-            'denominaciones' => 'required|array',
-            'ajuste' => 'required|bool'
             ]
         );
+
 
         foreach($val["productos"] as $prod){
             $op = new ProductOperation();
@@ -41,41 +52,54 @@ class SaleController extends Controller
             $op->subsidiary_id = Auth::user()->subsidiary_id;
             $op->amount = $prod["cantidad"];
             $op->adjustment = $val["ajuste"];
-            $op->description = $val["descripcion"];
+            $op->description = $val["descripcion"] ?? "";
             $op->type = Operations::out;
             $op->save();
 
-            $stock = ProductStock::whereProductId($prod["id"])->whereSubsidiaryId($op->subsidiary_id)->firstOrCreate();
+            $stock = ProductStock::whereProductId($prod["id"])->whereSubsidiaryId($op->subsidiary_id)->first()??
+                new ProductStock();
+
+            $stock->subsidiary_id = $op->subsidiary_id;
+            $stock->product_id = $prod["id"];
             $newquantity = $stock->quantity - $op->amount;
             $stock->quantity = ($newquantity) >= 0 ? $newquantity : 0;
             $stock->save();
         }
 
-        foreach($val["denominaciones"] as $den){
+        foreach($val["billetes"] as $den => $quan){
             $op = new BillOperation();
             $op->subsidiary_id = Auth::user()->subsidiary_id;
             $op->user_id = Auth::user()->id;
-            $op->amount = $den["cantidad"];
+            $op->amount = $quan;
             $op->operation = Operations::in;
             $op->adjustment = $val["ajuste"];
-            $op->description = $val["descripcion"];
+            $op->description = $val["descripcion"] ?? "";
 
-            if(array_key_first($den) == "transferencia") {
+            if($den == "transferencia") {
                 $op->medium = Mediums::card;
                 $op->currency = Currencies::cup;
-            }elseif(array_key_first($den) == "usd") {
+            }elseif($den == "usd") {
                 $op->medium = Mediums::cash;
                 $op->currency = Currencies::usd;
             }else{
-                $op->denomination = intval(array_key_first($den));
+                $op->medium = Mediums::cash;
+                $op->currency = Currencies::cup;
+                $op->denomination = $den;
             }
             $op->save();
 
-            $stock = DollarStock::whereSubsidiaryId(Auth::user()->subsidiary_id)->where('denomination', $op->denomination)->where('medium', $op->medium)->where('currency', $op->currency)->firstOrCreate();
+            $stock = BillStock::whereSubsidiaryId(Auth::user()->subsidiary_id)->where('denomination', $op->denomination)->where('medium', $op->medium)->where('currency', $op->currency)->first() ??
+                new BillStock();
+            $stock->subsidiary_id = Auth::user()->subsidiary_id;
+            $stock->denomination = $op->denomination;
             $stock->quantity += $op->amount;
+            $stock->medium = $op->medium;
+            $stock->currency = $op->currency;
             $stock->save();
 
         }
+
+        return response([], 200);
 
     }
 

@@ -34,7 +34,7 @@ return new class extends Migration
                 $table->string('description', 300)->nullable();
 
                 //cash
-                $table->integer('denomination');
+                $table->integer('denomination')->nullable();
             }
         );
     }

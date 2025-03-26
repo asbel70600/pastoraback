@@ -24,6 +24,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BillStock whereSubsidiaryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BillStock whereUpdatedAt($value)
  * @property-read \App\Models\Subsidiary $subsidiary
+ * @property string $medium
+ * @property string $currency
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BillStock whereCurrency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BillStock whereMedium($value)
+ * @property int|null $denomination
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BillStock whereDenomination($value)
  * @mixin \Eloquent
  */
 class BillStock extends Model
